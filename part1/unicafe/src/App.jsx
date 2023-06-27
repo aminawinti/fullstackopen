@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 const Statistics = ({ good, neutral, bad }) => {
   const AllFeedbacks = good + neutral + bad;
-  const average = (good - bad) / AllFeedbacks;
-  const positive = (good / AllFeedbacks) * 100;
+  const average = AllFeedbacks ? (good - bad) / AllFeedbacks : 0;
+  const positive = AllFeedbacks ? (good / AllFeedbacks) * 100 : 0;
   return (
     <>
       <h2>Statistics</h2>
