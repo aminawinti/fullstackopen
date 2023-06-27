@@ -1,12 +1,16 @@
 import { useState } from 'react';
 
 const Statistics = ({ good, neutral, bad }) => {
+  let statistics;
+
   const AllFeedbacks = good + neutral + bad;
   const average = AllFeedbacks ? (good - bad) / AllFeedbacks : 0;
   const positive = AllFeedbacks ? (good / AllFeedbacks) * 100 : 0;
-  return (
-    <>
-      <h2>Statistics</h2>
+
+  if (!AllFeedbacks) {
+    statistics = <p>No feedback given</p>;
+  } else {
+    statistics = (
       <div>
         <p>good {good}</p>
         <p>neutral {neutral}</p>
@@ -15,6 +19,13 @@ const Statistics = ({ good, neutral, bad }) => {
         <p>average {average}</p>
         <p>positive {positive} %</p>
       </div>
+    );
+  }
+
+  return (
+    <>
+      <h2>statistics</h2>
+      {statistics}
     </>
   );
 };
@@ -26,7 +37,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Give feedback</h2>
+      <h2>give feedback</h2>
       <div>
         <button onClick={() => setGood((g) => g + 1)}>good</button>
         <button onClick={() => setNeutral((n) => n + 1)}>neutral</button>
