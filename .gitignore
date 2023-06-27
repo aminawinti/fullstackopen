@@ -1,0 +1,15 @@
+# Ignore everything
+node_modules
+.eslintrc.*
+*.html
+*.json
+*.config.js
+
+# Include the src folder
+!part0/
+!part1/
+!part1/courseinfo/
+!part1/courseinfo/src/
+!part1/unicafe/
+!part1/unicafe/src/
+
