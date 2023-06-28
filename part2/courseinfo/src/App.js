@@ -1,5 +1,13 @@
 import Course from './Course';
 
+const Total = ({ course }) => {
+  const nbrOfCourses = course.parts.reduce(
+    (acc, cur) => acc + cur.exercises,
+    0
+  );
+  return <strong>total of {nbrOfCourses} exercises</strong>;
+};
+
 const App = () => {
   const course = {
     id: 1,
@@ -23,7 +31,12 @@ const App = () => {
     ],
   };
 
-  return <Course course={course} />;
+  return (
+    <>
+      <Course course={course} />
+      <Total course={course} />
+    </>
+  );
 };
 
 export default App;
