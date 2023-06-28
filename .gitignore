@@ -4,6 +4,7 @@ node_modules
 *.html
 *.json
 *.config.js
+.gitignore
 
 # Include the src folder
 !part0/
