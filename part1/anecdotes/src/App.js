@@ -1,5 +1,9 @@
 import { useState } from 'react';
 
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>{text}</button>
+);
+
 const anecdotes = [
   'If it hurts, do it more often.',
   'Adding manpower to a late software project makes it later!',
@@ -25,13 +29,23 @@ const App = () => {
     setVotes((v) => v.map((elt, idx) => (idx === selected ? (elt += 1) : elt)));
   }
 
+  const bestAnecdoteIndex = votes.indexOf(Math.max(...votes));
+
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {votes[selected]} votes</p>
       <div>
-        <button onClick={handleVote}>vote</button>
-        <button onClick={handleNextAnecdote}>next anecdote</button>
+        <h2>Anecdote of the day</h2>
+        <p>{anecdotes[selected]}</p>
+        <p>has {votes[selected]} votes</p>
+        <div>
+          <Button handleClick={() => handleVote()} text="vote" />
+          <Button handleClick={handleNextAnecdote} text="next anecdote" />
+        </div>
+      </div>
+      <div>
+        <h2>Anecdote with most votes</h2>
+        <div>{anecdotes[bestAnecdoteIndex]}</div>
+        <div>has {votes[bestAnecdoteIndex]} votes</div>
       </div>
     </div>
   );
