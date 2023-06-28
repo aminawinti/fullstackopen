@@ -22,7 +22,7 @@ const App = () => {
   const [votes, setVotes] = useState(Array(anecdotesLength).fill(0));
 
   function handleNextAnecdote() {
-    setSelected((s) => (anecdotesLength > s + 1 ? s + 1 : s));
+    setSelected(Math.floor(Math.random() * anecdotesLength));
   }
 
   function handleVote() {
