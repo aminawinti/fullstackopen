@@ -12,4 +12,6 @@ node_modules
 !part1/courseinfo/src/
 !part1/unicafe/
 !part1/unicafe/src/
+!part1/anecdotes/
+!part1/anecdotes/src/
 
