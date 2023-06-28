@@ -1,68 +1,68 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 
-const StatisticLine = ({ text, value, children }) => (
-  <tr>
-    <td>{text} </td>
-    <td>
-      {value} {children}
-    </td>
-  </tr>
-);
+// const StatisticLine = ({ text, value, children }) => (
+//   <tr>
+//     <td>{text} </td>
+//     <td>
+//       {value} {children}
+//     </td>
+//   </tr>
+// );
 
-const Button = ({ handleClick, children }) => (
-  <button onClick={handleClick}>{children}</button>
-);
+// const Button = ({ handleClick, children }) => (
+//   <button onClick={handleClick}>{children}</button>
+// );
 
-const Statistics = ({ good, neutral, bad }) => {
-  let statistics;
+// const Statistics = ({ good, neutral, bad }) => {
+//   let statistics;
 
-  const AllFeedbacks = good + neutral + bad;
-  const average = AllFeedbacks ? (good - bad) / AllFeedbacks : 0;
-  const positive = AllFeedbacks ? (good / AllFeedbacks) * 100 : 0;
+//   const AllFeedbacks = good + neutral + bad;
+//   const average = AllFeedbacks ? (good - bad) / AllFeedbacks : 0;
+//   const positive = AllFeedbacks ? (good / AllFeedbacks) * 100 : 0;
 
-  if (!AllFeedbacks) {
-    statistics = <p>No feedback given</p>;
-  } else {
-    statistics = (
-      <div>
-        <tbody>
-          <StatisticLine text="good" value={good} />
-          <StatisticLine text="neutral" value={neutral} />
-          <StatisticLine text="bad" value={bad} />
-          <StatisticLine text="all" value={AllFeedbacks} />
-          <StatisticLine text="average" value={average} />
-          <StatisticLine text="positive" value={positive}>
-            %
-          </StatisticLine>
-        </tbody>
-      </div>
-    );
-  }
+//   if (!AllFeedbacks) {
+//     statistics = <p>No feedback given</p>;
+//   } else {
+//     statistics = (
+//       <div>
+//         <tbody>
+//           <StatisticLine text="good" value={good} />
+//           <StatisticLine text="neutral" value={neutral} />
+//           <StatisticLine text="bad" value={bad} />
+//           <StatisticLine text="all" value={AllFeedbacks} />
+//           <StatisticLine text="average" value={average} />
+//           <StatisticLine text="positive" value={positive}>
+//             %
+//           </StatisticLine>
+//         </tbody>
+//       </div>
+//     );
+//   }
 
-  return (
-    <>
-      <h2>statistics</h2>
-      {statistics}
-    </>
-  );
-};
+//   return (
+//     <>
+//       <h2>statistics</h2>
+//       {statistics}
+//     </>
+//   );
+// };
 
-const App = () => {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+// const App = () => {
+//   const [good, setGood] = useState(0);
+//   const [neutral, setNeutral] = useState(0);
+//   const [bad, setBad] = useState(0);
 
-  return (
-    <div>
-      <h2>give feedback</h2>
-      <div>
-        <Button handleClick={() => setGood((g) => g + 1)}>good</Button>
-        <Button handleClick={() => setNeutral((n) => n + 1)}>neutral</Button>
-        <Button handleClick={() => setBad((b) => b + 1)}>bad</Button>
-      </div>
-      <Statistics good={good} neutral={neutral} bad={bad} />
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <h2>give feedback</h2>
+//       <div>
+//         <Button handleClick={() => setGood((g) => g + 1)}>good</Button>
+//         <Button handleClick={() => setNeutral((n) => n + 1)}>neutral</Button>
+//         <Button handleClick={() => setBad((b) => b + 1)}>bad</Button>
+//       </div>
+//       <Statistics good={good} neutral={neutral} bad={bad} />
+//     </div>
+//   );
+// };
 
-export default App;
+// export default App;
