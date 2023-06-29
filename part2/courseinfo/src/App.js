@@ -1,12 +1,4 @@
-import Course from './Course';
-
-const Total = ({ course }) => {
-  const nbrOfCourses = course.parts.reduce(
-    (acc, cur) => acc + cur.exercises,
-    0
-  );
-  return <strong>total of {nbrOfCourses} exercises</strong>;
-};
+import Course from './components/Course';
 
 const App = () => {
   const courses = [
@@ -58,10 +50,7 @@ const App = () => {
     <div>
       <h1>Web development curriculum</h1>
       {courses.map((course) => (
-        <div key={course.id}>
-          <Course course={course} />
-          <Total course={course} />
-        </div>
+        <Course key={course.id} course={course} />
       ))}
     </div>
   );
