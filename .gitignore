@@ -17,3 +17,5 @@ node_modules
 !part1/anecdotes/src/
 !part2/courseinfo/
 !part2/courseinfo/src/
+!part2/phonebook/
+!part2/phonebook/src/
