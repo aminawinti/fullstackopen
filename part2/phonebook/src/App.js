@@ -66,6 +66,12 @@ const App = () => {
               p.id !== returnedPerson.id ? p : returnedPerson
             );
             setPersons(updatedPersons);
+            setMessage(
+              `Updated ${newPerson.name}'s number to: ${returnedPerson.number}`
+            );
+            setTimeout(() => {
+              setMessage(null);
+            }, 3000);
           });
       }
     }
