@@ -25,7 +25,7 @@ const App = () => {
   const [persons, setPersons] = useState([]);
   const [filter, setFilter] = useState('');
   const [newPerson, setNewPerson] = useState({ name: '', number: '' });
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState({ content: '', level: 'info' });
 
   useEffect(() => {
     personService.getAll().then((initialPersons) => {
@@ -48,9 +48,9 @@ const App = () => {
 
       personService.create(newPerson).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
-        setMessage(`Added ${newPerson.name}`);
+        setMessage({ ...message, content: `Added ${newPerson.name}` });
         setTimeout(() => {
-          setMessage(null);
+          setMessage({ content: '', level: 'info' });
         }, 2000);
       });
     } else {
@@ -66,11 +66,21 @@ const App = () => {
               p.id !== returnedPerson.id ? p : returnedPerson
             );
             setPersons(updatedPersons);
-            setMessage(
-              `Updated ${newPerson.name}'s number to: ${returnedPerson.number}`
-            );
+            setMessage({
+              ...message,
+              content: `Updated ${newPerson.name}'s number to: ${returnedPerson.number}`,
+            });
             setTimeout(() => {
-              setMessage(null);
+              setMessage({ content: '', level: 'info' });
+            }, 2000);
+          })
+          .catch((error) => {
+            setMessage({
+              content: `Information of ${newPerson.name}'s has already been removed from server`,
+              level: 'error',
+            });
+            setTimeout(() => {
+              setMessage({ content: '', level: 'info' });
             }, 3000);
           });
       }
