@@ -2,12 +2,18 @@ import { useEffect, useState } from 'react';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
-import axios from 'axios';
+import personService from './services/persons';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('');
   const [newPerson, setNewPerson] = useState({ name: '', number: '' });
+
+  useEffect(() => {
+    personService.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,46 +23,60 @@ const App = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const existingPerson = persons.filter((p) => p.name === newPerson.name)[0];
+    const existingPerson = persons.find((p) => p.name === newPerson.name);
 
-    if (existingPerson) {
-      alert(`${newPerson.name} is already added to phonebook`);
-      return;
+    if (!existingPerson) {
+      personService.create(newPerson).then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+      });
+    } else {
+      const confirmed = window.confirm(
+        `${newPerson.name} is already added to phonebook, replace the old number with a new one?`
+      );
+
+      if (confirmed) {
+        personService
+          .update(existingPerson.id, newPerson)
+          .then((returnedPerson) => {
+            const updatedPersons = persons.map((p) =>
+              p.id !== returnedPerson.id ? p : returnedPerson
+            );
+            setPersons(updatedPersons);
+          });
+      }
     }
-
-    const createdPerson = {
-      id: persons.length + 1,
-      ...newPerson,
-    };
-
-    setPersons((persons) => persons.concat(createdPerson));
     setNewPerson({ name: '', number: '' });
   };
 
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value.toLowerCase());
+  const handleFilter = (e) => {
+    setFilter(e.target.value.toLowerCase());
   };
 
-  const searchedPersons = search
-    ? persons.filter((p) => p.name.toLowerCase() === search)
-    : persons;
+  const handleDelete = (id, name) => {
+    const confirmed = window.confirm(`Delete ${name}?`);
 
-  useEffect(() => {
-    axios.get('http://localhost:3001/persons').then((response) => {
-      setPersons(response.data);
-    });
-  }, []);
+    if (confirmed) {
+      personService.remove(id).then((response) => {
+        const updatedPersons = persons.filter((person) => person.id !== id);
+        setPersons(updatedPersons);
+      });
+    }
+  };
+
+  const filteredPersons = filter
+    ? persons.filter((p) => p.name.toLowerCase() === filter)
+    : persons;
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter search={search} onSearchChange={handleSearchChange} />
+      <Filter filter={filter} onFilterChange={handleFilter} />
       <PersonForm
         handleChange={handleChange}
         person={newPerson}
         onFormSubmit={handleFormSubmit}
       />
-      <Persons persons={searchedPersons} />
+      <Persons persons={filteredPersons} onDelete={handleDelete} />
     </div>
   );
 };

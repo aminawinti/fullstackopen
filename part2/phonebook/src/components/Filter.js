@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Filter = ({ search, onSearchChange }) => {
+const Filter = ({ filter, onFilterChange }) => {
   return (
     <div>
-      <label htmlFor="search">filter shown with </label>
-      <input id="search" value={search} onChange={onSearchChange} />
+      <label htmlFor="filter">filter shown with </label>
+      <input id="filter" value={filter} onChange={onFilterChange} />
     </div>
   );
 };
