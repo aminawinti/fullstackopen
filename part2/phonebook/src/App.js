@@ -3,11 +3,29 @@ import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
 import personService from './services/persons';
+import Notification from './components/Notification';
+
+const Footer = () => {
+  const footerStyle = {
+    color: 'green',
+    fontStyle: 'italic',
+    fontSize: 16,
+  };
+  return (
+    <div style={footerStyle}>
+      <br />
+      <em>
+        Note app, Department of Computer Science, University of Helsinki 2022
+      </em>
+    </div>
+  );
+};
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [filter, setFilter] = useState('');
   const [newPerson, setNewPerson] = useState({ name: '', number: '' });
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     personService.getAll().then((initialPersons) => {
@@ -26,8 +44,14 @@ const App = () => {
     const existingPerson = persons.find((p) => p.name === newPerson.name);
 
     if (!existingPerson) {
+      if (!newPerson.name || !newPerson.number) return;
+
       personService.create(newPerson).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
+        setMessage(`Added ${newPerson.name}`);
+        setTimeout(() => {
+          setMessage(null);
+        }, 2000);
       });
     } else {
       const confirmed = window.confirm(
@@ -70,13 +94,16 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
       <Filter filter={filter} onFilterChange={handleFilter} />
       <PersonForm
         handleChange={handleChange}
         person={newPerson}
         onFormSubmit={handleFormSubmit}
       />
+      <h2>Numbers</h2>
       <Persons persons={filteredPersons} onDelete={handleDelete} />
+      <Footer />
     </div>
   );
 };

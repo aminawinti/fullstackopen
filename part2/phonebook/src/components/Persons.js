@@ -13,7 +13,6 @@ const Persons = ({ persons, onDelete }) => {
   }
   return (
     <>
-      <h2>Numbers</h2>
       {persons.map((person) => (
         <Person key={person.id} person={person} onDelete={onDelete} />
       ))}
