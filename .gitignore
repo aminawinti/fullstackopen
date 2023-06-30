@@ -1,5 +1,6 @@
 # Ignore everything
 node_modules
+public
 .eslintrc.*
 *.html
 *.json
@@ -19,3 +20,4 @@ node_modules
 !part2/courseinfo/src/
 !part2/phonebook/
 !part2/phonebook/src/
+!part2/phonebook/db.json
