@@ -21,3 +21,5 @@ public
 !part2/phonebook/
 !part2/phonebook/src/
 !part2/phonebook/db.json
+!part2/countries/
+!part2/countries/src/
