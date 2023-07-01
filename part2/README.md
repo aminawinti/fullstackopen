@@ -9,4 +9,5 @@ a. [Rendering a collection, modules](https://fullstackopen.com/en/part2/renderin
 b. [Forms](https://fullstackopen.com/en/part2/forms)  
 c. [Getting data from server](https://fullstackopen.com/en/part2/getting_data_from_server)  
 d. [Altering data in server](https://fullstackopen.com/en/part2/altering_data_in_server)
+<br />
 e. [Adding Styles to React app](https://fullstackopen.com/en/part2/adding_styles_to_react_app)
