@@ -6,6 +6,7 @@ public
 *.json
 *.config.js
 .gitignore
+.env
 
 # Include the src folder
 !part0/

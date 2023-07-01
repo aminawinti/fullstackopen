@@ -1,4 +1,5 @@
 import React from 'react';
+import WeatherDetails from './WeatherDetails';
 
 const CountryDetails = ({ countries }) => {
   return (
@@ -6,15 +7,16 @@ const CountryDetails = ({ countries }) => {
       <h1>{countries.name.common}</h1>
       <p>capital {countries.capital[0]}</p>
       <p>area {countries.area}</p>
-      <p>
-        languages:
+      <div>
+        <h3>languages:</h3>
         <ul>
           {Object.values(countries.languages).map((lang) => (
-            <li>{lang}</li>
+            <li key={lang}>{lang}</li>
           ))}
         </ul>
-      </p>
+      </div>
       <img src={countries.flags.png} alt={countries.name.common} />
+      <WeatherDetails capital={countries.capital[0]} />
     </>
   );
 };
