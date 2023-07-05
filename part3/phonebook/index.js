@@ -46,6 +46,26 @@ app.get('/api/persons/:id', (req, res) => {
   }
 });
 
+app.post('/api/persons', (req, res) => {
+  const body = req.body;
+
+  if (!body.name || !body.number) {
+    return res.status(400).end();
+  }
+
+  const personId = Math.floor(Math.random() * 10000);
+
+  const newPerson = {
+    id: personId,
+    name: body.name,
+    number: body.number,
+  };
+
+  persons = persons.concat(newPerson);
+
+  res.json(persons);
+});
+
 app.delete('/api/persons/:id', (req, res) => {
   const personId = Number(req.params.id);
   persons = persons.filter((p) => p.id !== personId);
