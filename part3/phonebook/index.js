@@ -26,12 +26,21 @@ let persons = [
   },
 ];
 
-app.get('/', (request, response) => {
-  response.send('<h1>Server starts..</h1>');
+app.get('/', (req, res) => {
+  res.send('<h1>Server starts..</h1>');
 });
 
 app.get('/api/persons', (req, res) => {
   res.json(persons);
+});
+
+app.get('/info', (req, res) => {
+  const now = new Date();
+
+  res.send(`<p>
+    <p>Phonebook has info for 2 people</p>
+    <p>${now.toString()}</p>
+  </p>`);
 });
 
 const PORT = 3001;
