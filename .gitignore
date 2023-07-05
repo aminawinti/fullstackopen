@@ -24,3 +24,6 @@ public
 !part2/phonebook/db.json
 !part2/countries/
 !part2/countries/src/
+!part3/phonebook/
+!part3/phonebook/index.js
+!part3/phonebook/package.json
