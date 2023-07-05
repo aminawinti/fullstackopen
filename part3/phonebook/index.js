@@ -47,18 +47,28 @@ app.get('/api/persons/:id', (req, res) => {
 });
 
 app.post('/api/persons', (req, res) => {
-  const body = req.body;
+  const { name, number } = req.body;
 
-  if (!body.name || !body.number) {
-    return res.status(400).end();
+  if (!name || !number) {
+    return res.status(400).json({
+      error: 'name or number is missing',
+    });
+  }
+
+  const personsNames = persons.map((p) => p.name);
+
+  if (personsNames.includes(name)) {
+    return res.status(400).json({
+      error: 'name must be unique',
+    });
   }
 
   const personId = Math.floor(Math.random() * 10000);
 
   const newPerson = {
     id: personId,
-    name: body.name,
-    number: body.number,
+    name,
+    number,
   };
 
   persons = persons.concat(newPerson);
