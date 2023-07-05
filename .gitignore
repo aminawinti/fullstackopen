@@ -25,5 +25,6 @@ public
 !part2/countries/
 !part2/countries/src/
 !part3/phonebook/
+!part3/phonebook/build
 !part3/phonebook/index.js
 !part3/phonebook/package.json
