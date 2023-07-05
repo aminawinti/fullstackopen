@@ -34,11 +34,23 @@ app.get('/api/persons', (req, res) => {
   res.json(persons);
 });
 
+app.get('/api/persons/:id', (req, res) => {
+  const personId = Number(req.params.id);
+
+  const person = persons.find((p) => p.id === personId);
+
+  if (person) {
+    res.json(person);
+  } else {
+    res.status(404).end();
+  }
+});
+
 app.get('/info', (req, res) => {
   const now = new Date();
 
   res.send(`<p>
-    <p>Phonebook has info for 2 people</p>
+    <p>Phonebook has info for ${persons.length} people</p>
     <p>${now.toString()}</p>
   </p>`);
 });
