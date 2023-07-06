@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const path = require('path');
 
 const app = express();
 
@@ -16,8 +15,6 @@ morgan.token('data', (req) =>
 app.use(
   morgan(':method :url :status :res[content-length] - :response-time ms :data')
 );
-
-app.use(express.static(path.join(__dirname, 'build')));
 
 let persons = [
   {
@@ -41,10 +38,6 @@ let persons = [
     number: '39-23-6423122',
   },
 ];
-
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 app.get('/info', (req, res) => {
   const now = new Date();
