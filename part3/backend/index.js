@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 
@@ -38,6 +39,13 @@ let persons = [
     number: '39-23-6423122',
   },
 ];
+
+app.use(express.static('build'));
+
+app.get('/', (req, res) => {
+  console.log(`path: ${path.join(__dirname, 'build', 'index.html')}`);
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.get('/info', (req, res) => {
   const now = new Date();
