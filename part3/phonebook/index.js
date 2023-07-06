@@ -4,8 +4,8 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.use(express.static('build'));
 
 morgan.token('data', (req) =>
@@ -38,6 +38,15 @@ let persons = [
     number: '39-23-6423122',
   },
 ];
+
+app.get('/info', (req, res) => {
+  const now = new Date();
+
+  res.send(`<p>
+    <p>Phonebook has info for ${persons.length} people</p>
+    <p>${now.toString()}</p>
+  </p>`);
+});
 
 app.get('/api/persons', (req, res) => {
   res.json(persons);
@@ -89,15 +98,6 @@ app.delete('/api/persons/:id', (req, res) => {
   const personId = Number(req.params.id);
   persons = persons.filter((p) => p.id !== personId);
   res.status(204).end();
-});
-
-app.get('/info', (req, res) => {
-  const now = new Date();
-
-  res.send(`<p>
-    <p>Phonebook has info for ${persons.length} people</p>
-    <p>${now.toString()}</p>
-  </p>`);
 });
 
 const PORT = process.env.PORT || 3001;
