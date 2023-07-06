@@ -43,6 +43,8 @@ let persons = [
 app.use(express.static('build'));
 
 app.get('/', (req, res) => {
+  console.log(`dirname: ${__dirname}`);
+  console.log(`path var: ${path}`);
   console.log(`path: ${path.join(__dirname, 'build', 'index.html')}`);
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
