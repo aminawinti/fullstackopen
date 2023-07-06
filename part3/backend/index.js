@@ -44,7 +44,8 @@ app.get('/', (req, res) => {
   console.log(`dirname: ${__dirname}`);
   console.log(`path var: ${path}`);
   console.log(`path: ${path.join(__dirname, 'build', 'index.html')}`);
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  // res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.resolve('backend/build/index.html'));
 });
 
 app.get('/info', (req, res) => {
