@@ -7,6 +7,7 @@ public
 *.config.js
 .gitignore
 .env
+part3/frontend/
 
 # Include the src folder
 !part0/
