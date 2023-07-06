@@ -1,15 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const path = require('path');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/build')));
+app.use(express.static('build'));
 
 morgan.token('data', (req) =>
   req.method === 'POST' ? JSON.stringify(req.body) : ' '
@@ -41,18 +38,6 @@ let persons = [
     number: '39-23-6423122',
   },
 ];
-
-// app.get('/', (req, res) => {
-//   console.log(`dirname: ${__dirname}`);
-//   console.log(`path var: ${path}`);
-//   console.log(`path: ${path.join(__dirname, 'build', 'index.html')}`);
-//   // res.sendFile(path.join(__dirname, 'build', 'index.html'));
-//   res.sendFile(path.resolve('./build/index.html'));
-// });
-
-app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/build/index.html'))
-);
 
 app.get('/info', (req, res) => {
   const now = new Date();
