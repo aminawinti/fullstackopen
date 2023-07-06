@@ -24,7 +24,14 @@ public
 !part2/phonebook/db.json
 !part2/countries/
 !part2/countries/src/
+<<<<<<< HEAD
 !part3/backend/
 !part3/backend/build/
 !part3/backend/index.js
 !part3/backend/package.json
+=======
+!part3/phonebook/
+!part3/phonebook/build/
+!part3/phonebook/index.js
+!part3/phonebook/package.json
+>>>>>>> 57d8edf9e5f3753d60d9e7ec7383dac37bd94eb4
