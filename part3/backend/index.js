@@ -40,8 +40,6 @@ let persons = [
   },
 ];
 
-app.use(express.static('build'));
-
 app.get('/', (req, res) => {
   console.log(`dirname: ${__dirname}`);
   console.log(`path var: ${path}`);
